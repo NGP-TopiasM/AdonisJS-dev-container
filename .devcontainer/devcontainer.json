@@ -33,7 +33,7 @@
         ]
       },
       "extensions": [
-        "Hridoy.adonisjs-snippets",
+        "jripouteau.adonis-vscode-extension",
         "esbenp.prettier-vscode",
         "VisualStudioExptTeam.vscodeintellicode",
         "mtxr.sqltools",
