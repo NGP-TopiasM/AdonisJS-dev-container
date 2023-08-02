@@ -57,6 +57,4 @@ else
 
 fi
 
-git config --global --add safe.directory $WORKSPACE_FOLDER
-
 # node ace serve
