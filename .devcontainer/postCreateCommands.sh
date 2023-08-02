@@ -51,10 +51,12 @@ then
     setupPg
 
 else 
-    cp .devcontainer/.env.example .env
+    cp .env.example .env
 
     npm install
 
 fi
+
+git config --global --add safe.directory $WORKSPACE_FOLDER
 
 # node ace serve
