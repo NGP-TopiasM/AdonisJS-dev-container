@@ -12,6 +12,9 @@
   "forwardPorts": [
     3000 /*,5432*/
   ],
+  "containerEnv": {
+    "WORKSPACE_FOLDER": "${containerWorkspaceFolder}"
+  },
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "./.devcontainer/postCreateCommands.sh",
   // Configure tool-specific properties.
