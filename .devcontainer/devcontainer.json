@@ -17,7 +17,7 @@
   },
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "./.devcontainer/postCreateCommands.sh",
-  "postAttachCommand": "git config --get safe.directory | grep -q \"$containerWorkspaceFolder\" || git config --global --add safe.directory ${containerWorkspaceFolder}",
+  "postAttachCommand": "git config --get safe.directory | grep -q \"${containerWorkspaceFolder}\" || git config --global --add safe.directory ${containerWorkspaceFolder}",
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
