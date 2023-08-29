@@ -35,6 +35,11 @@ function setupPg() {
     node ace generate:manifest
 }
 
+function setupRedis() {
+    npm i @adonisjs/redis
+    node ace configure @adonisjs/redis
+}
+
 if [ ! -f ".env.example" ]
 then
     # Create AdonisJS project
@@ -49,6 +54,7 @@ then
     cp .devcontainer/resources/.eslintrc.json .eslintrc.json
     
     setupPg
+    setupRedis
 
 else 
     cp .env.example .env
