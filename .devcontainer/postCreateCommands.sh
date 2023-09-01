@@ -31,13 +31,32 @@ function setupPg() {
     sed -i '27 i \ \ PG_USER: Env.schema.string(),' env.ts
     sed -i '28 i \ \ PG_PASSWORD: Env.schema.string.optional(),' env.ts
     sed -i '29 i \ \ PG_DB_NAME: Env.schema.string(),' env.ts
-
-    node ace generate:manifest
+    
+    cp .devcontainer/resources/database.ts config/database.ts
 }
 
 function setupRedis() {
     npm i @adonisjs/redis
-    node ace configure @adonisjs/redis
+    
+    echo "REDIS_CONNECTION=local" >> .env
+    echo "REDIS_HOST=127.0.0.1" >> .env
+    echo "REDIS_PORT=6379" >> .env
+    echo "REDIS_PASSWORD=" >> .env
+    
+    echo "REDIS_CONNECTION=local" >> .env.example
+    echo "REDIS_HOST=127.0.0.1" >> .env.example
+    echo "REDIS_PORT=6379" >> .env.example
+    echo "REDIS_PASSWORD=" >> .env.example
+    
+    sed -i '/lucid/ s/^\(.*\)\("\)/\1", "\@adonisjs\/redis\"/' tsconfig.json
+    sed -i '/\@adonisjs\/lucid"/ s/^\(.*\)\("\)/\1", "\@adonisjs\/redis\"/' .adonisrc.json
+    
+    sed -i "30 i \ \ REDIS_CONNECTION: Env.schema.enum(['local'] as const)," env.ts
+    sed -i "31 i \ \ REDIS_HOST: Env.schema.string({ format: 'host' })," env.ts
+    sed -i "32 i \ \ REDIS_PORT: Env.schema.number()," env.ts
+    sed -i "33 i \ \ REDIS_PASSWORD: Env.schema.string.optional()," env.ts
+    
+    cp .devcontainer/resources/redis.ts config/redis.ts
 }
 
 if [ ! -f ".env.example" ]
@@ -50,17 +69,14 @@ then
     cd $FOLDER && find . -mindepth 1 -maxdepth 1 -exec mv -t .. -- {} +
     cd .. && rm -r $FOLDER
 
-    cp .devcontainer/resources/database.ts config/database.ts
     cp .devcontainer/resources/.eslintrc.json .eslintrc.json
     
     setupPg
     setupRedis
-
+    node ace generate:manifest
 else 
     cp .env.example .env
 
     npm install
 
 fi
-
-# node ace serve
