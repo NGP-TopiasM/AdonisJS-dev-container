@@ -98,6 +98,7 @@ then
 
     setupPg
     setupRedis
+    cp .devcontainer/resources/MakeRepo.ts commands/ # Make repository command
     node ace generate:manifest
 
     if [ -n "$NPM_TOKEN" ]; then setupPrivateNpm; fi;
