@@ -2,6 +2,10 @@
 
 FOLDER=service
 
+set -a
+source .devcontainer/.env
+set +a
+
 function setupPg() {
     npm i @adonisjs/lucid pg luxon
     
@@ -59,10 +63,24 @@ function setupRedis() {
     cp .devcontainer/resources/redis.ts config/redis.ts
 }
 
+function setupPrivateNpm() {
+    touch .npmrc
+    echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
+    echo ".npmrc" >> .gitignore
+
+    npm install @clearvue/adonis-auth-middleware@latest
+}
+
 if [ ! -f ".env.example" ]
 then
     # Create AdonisJS project
-    npm install create-adonis-ts-app@4.2.4 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier
+    echo $PROJECT_NAME
+    if [ -n "$PROJECT_NAME" ]; then
+        echo 'test'
+        npm install create-adonis-ts-app@4.2.4 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier --name=$PROJECT_NAME 
+    else
+        npm install create-adonis-ts-app@4.2.4 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier
+    fi
 
     rm -r node_modules
 
@@ -74,9 +92,10 @@ then
     setupPg
     setupRedis
     node ace generate:manifest
+    
+    setupPrivateNpm
 else 
     cp .env.example .env
 
     npm install
-
 fi
