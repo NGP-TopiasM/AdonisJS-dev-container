@@ -93,7 +93,7 @@ then
     setupRedis
     node ace generate:manifest
     
-    setupPrivateNpm
+    if [ -n "$NPM_TOKEN" ]; then setupPrivateNpm; fi;
 else 
     cp .env.example .env
 
