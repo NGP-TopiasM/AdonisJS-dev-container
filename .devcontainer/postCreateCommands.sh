@@ -80,17 +80,17 @@ function configNamespaces() {
 if [ ! -f ".env.example" ]
 then
     # Create AdonisJS project
-    echo $PROJECT_NAME
     if [ -n "$PROJECT_NAME" ]; then
         npm install create-adonis-ts-app@4.2.4 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier --name=$PROJECT_NAME 
     else
         npm install create-adonis-ts-app@4.2.4 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier
     fi
-
+    
     rm -r node_modules
 
     cd $FOLDER && find . -mindepth 1 -maxdepth 1 -exec mv -t .. -- {} +
     cd .. && rm -r $FOLDER
+    echo ".devcontainer/.env" >> .gitignore
 
     cp .devcontainer/resources/.eslintrc.json .eslintrc.json
 
