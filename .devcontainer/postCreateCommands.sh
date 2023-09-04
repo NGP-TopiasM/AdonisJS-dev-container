@@ -71,12 +71,17 @@ function setupPrivateNpm() {
     npm install @clearvue/adonis-auth-middleware@latest
 }
 
+function configNamespaces() {
+    sed -i '9 i \ \ "namespaces": {' .adonisrc.json
+    sed -i '10 i \ \ \ \ "models": "App/Repositories/Models"' .adonisrc.json
+    sed -i '11 i \ \ },' .adonisrc.json
+}
+
 if [ ! -f ".env.example" ]
 then
     # Create AdonisJS project
     echo $PROJECT_NAME
     if [ -n "$PROJECT_NAME" ]; then
-        echo 'test'
         npm install create-adonis-ts-app@4.2.4 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier --name=$PROJECT_NAME 
     else
         npm install create-adonis-ts-app@4.2.4 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier
@@ -88,12 +93,16 @@ then
     cd .. && rm -r $FOLDER
 
     cp .devcontainer/resources/.eslintrc.json .eslintrc.json
-    
+
+    npm i lodash @types/lodash
+
     setupPg
     setupRedis
     node ace generate:manifest
-    
+
     if [ -n "$NPM_TOKEN" ]; then setupPrivateNpm; fi;
+
+    configNamespaces
 else 
     cp .env.example .env
 
