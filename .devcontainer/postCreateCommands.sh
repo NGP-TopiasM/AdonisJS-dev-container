@@ -77,6 +77,23 @@ function configNamespaces() {
     sed -i '11 i \ \ },' .adonisrc.json
 }
 
+function installCommonLibraries() {
+    npm i lodash @types/lodash
+    npm i axios
+    npm i kafkajs
+}
+
+function createConstsFile() {
+    mkdir app/Data
+    touch app/Data/Consts.ts
+    
+    echo "/*" >> app/Data/Consts.ts >> app/Data/Consts.ts
+    echo "Example of ENUM values and type:" >> app/Data/Consts.ts
+    echo "export const ENUM_THINGS = ['foo', 'bar'] as const" >> app/Data/Consts.ts
+    echo "export type EnumThing = (typeof ENUMS_THINGS)[number]" >> app/Data/Consts.ts
+    echo "*/" >> app/Data/Consts.ts >> app/Data/Consts.ts
+}
+
 if [ ! -f ".env.example" ]
 then
     # Create AdonisJS project
@@ -90,11 +107,9 @@ then
 
     cd $FOLDER && find . -mindepth 1 -maxdepth 1 -exec mv -t .. -- {} +
     cd .. && rm -r $FOLDER
+
     echo ".devcontainer/.env" >> .gitignore
-
     cp .devcontainer/resources/.eslintrc.json .eslintrc.json
-
-    npm i lodash @types/lodash
 
     setupPg
     setupRedis
@@ -103,7 +118,9 @@ then
 
     if [ -n "$NPM_TOKEN" ]; then setupPrivateNpm; fi;
 
+    installCommonLibraries
     configNamespaces
+    createConstsFile
 else 
     cp .env.example .env
 
