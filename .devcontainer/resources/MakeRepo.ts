@@ -31,7 +31,7 @@ export default class MakeRepo extends BaseCommand {
   public name: string
 
   public async run() {
-    const stub = `\nexport class {{filename}} {\n\n}`
+    const stub = `\nexport default class {{filename}} {\n\n}`
 
     const name = this.name
 
