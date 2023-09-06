@@ -87,11 +87,11 @@ function createConstsFile() {
     mkdir app/Data
     touch app/Data/Consts.ts
     
-    echo "/*" >> app/Data/Consts.ts >> app/Data/Consts.ts
-    echo "Example of ENUM values and type:" >> app/Data/Consts.ts
-    echo "export const ENUM_THINGS = ['foo', 'bar'] as const" >> app/Data/Consts.ts
-    echo "export type EnumThing = (typeof ENUMS_THINGS)[number]" >> app/Data/Consts.ts
-    echo "*/" >> app/Data/Consts.ts >> app/Data/Consts.ts
+    echo "/*" >> app/Data/Constants.ts
+    echo "Example of ENUM values and type:" >> app/Data/Constants.ts
+    echo "export const ENUM_THINGS = ['foo', 'bar'] as const" >> app/Data/Constants.ts
+    echo "export type EnumThing = (typeof ENUMS_THINGS)[number]" >> app/Data/Constants.ts
+    echo "*/" >> app/Data/Constants.ts
 }
 
 if [ ! -f ".env.example" ]
