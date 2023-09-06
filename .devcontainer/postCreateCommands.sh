@@ -85,7 +85,7 @@ function installCommonLibraries() {
 
 function createConstsFile() {
     mkdir app/Data
-    touch app/Data/Consts.ts
+    touch app/Data/Constants.ts
     
     echo "/*" >> app/Data/Constants.ts
     echo "Example of ENUM values and type:" >> app/Data/Constants.ts
