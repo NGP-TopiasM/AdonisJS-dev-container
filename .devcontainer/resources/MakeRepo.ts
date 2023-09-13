@@ -31,7 +31,7 @@ export default class MakeRepo extends BaseCommand {
   public name: string
 
   public async run() {
-    const stub = `\nexport default class {{filename}} {\n\n}`
+    const stub = `//import Env from '@ioc:Adonis/Core/Env'\n\nclass {{filename}} {\n\n}\n\nexport default new {{filename}}`
 
     const name = this.name
 
