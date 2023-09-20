@@ -125,4 +125,6 @@ else
     cp .env.example .env
 
     npm install
+
+    node ace migration:fresh
 fi
