@@ -29,6 +29,9 @@
       "settings": {
         "typescript.tsdk": "./node_modules/typescript/lib",
         "editor.formatOnSave": true,
+        "editor.quickSuggestions": {
+          "strings": "on"
+        },
         "sqltools.connections": [
           {
             "name": "Local Pg",
