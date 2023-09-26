@@ -94,11 +94,11 @@ function createConstsFile() {
 function removeFiles() {
     rm -r -f .devcontainer/resources
     rm .devcontainer/.env.example
-    if [ -f ".devcontainer/.env" ]; then rm .devcontainer/.env; fi;
+    if [ -f ".devcontainer/.env" ]; then rm .devcontainer/.env; fi
 }
 
 function loggerSetup() {
-  if [ -n "$PROJECT_NAME" ]; then echo "APP_NAME=${PROJECT_NAME}" >> .env; else echo "APP_NAME=NGP-MICROSERVICE" >> .env; fi;
+  if [ -n "$PROJECT_NAME" ]; then echo "APP_NAME=${PROJECT_NAME}" >> .env; else echo "APP_NAME=NGP-MICROSERVICE" >> .env; fi
   sed -i 's/generateRequestId:\ false/generateRequestId:\ true/g' config/app.ts
 }
 
@@ -124,7 +124,7 @@ setupRedis
 cp .devcontainer/resources/MakeRepo.ts commands/ # Make repository command
 node ace generate:manifest
 
-if [ -n "$NPM_TOKEN" ]; then setupPrivateNpm; fi;
+if [ -n "$NPM_TOKEN" ]; then setupPrivateNpm; fi
 
 installCommonLibraries
 configNamespaces
