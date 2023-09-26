@@ -125,4 +125,4 @@ installCommonLibraries
 configNamespaces
 createConstsFile
 
-cp -r .devcontainer/resources/afterInitPostCreateCommands.sh .devcontainer/resources/postCreateCommands.sh && removeFiles
+cp -r .devcontainer/resources/afterInitPostCreateCommands.sh .devcontainer/postCreateCommands.sh && removeFiles
