@@ -99,6 +99,11 @@ function removeFiles() {
     if [ -f ".devcontainer/.env" ]; then rm .devcontainer/.env; fi;
 }
 
+function loggerSetup() {
+  if [ -n "$PROJECT_NAME" ]; then echo "APP_NAME=${PROJECT_NAME}" >> .env; else echo "APP_NAME=NGP-MICROSERVICE" >> .env; fi;
+  sed -i 's/generateRequestId:\ false/generateRequestId:\ true/g' config/app.ts
+}
+
 # Create AdonisJS project
 if [ -n "$PROJECT_NAME" ]; then
     npm install create-adonis-ts-app@4.2.4 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier --name=$PROJECT_NAME
@@ -114,8 +119,10 @@ cd .. && rm -r $FOLDER
 echo ".devcontainer/.env" >> .gitignore
 cp .devcontainer/resources/.eslintrc.json .eslintrc.json
 
+loggerSetup
 setupPg
 setupRedis
+
 cp .devcontainer/resources/MakeRepo.ts commands/ # Make repository command
 node ace generate:manifest
 
