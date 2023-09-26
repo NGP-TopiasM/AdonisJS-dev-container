@@ -9,7 +9,7 @@ export default class MakeRepo extends BaseCommand {
   /**
    * Command description is displayed in the "help" output
    */
-  public static description = ''
+  public static description = 'Make a new Repository file'
 
   public static settings = {
     /**
