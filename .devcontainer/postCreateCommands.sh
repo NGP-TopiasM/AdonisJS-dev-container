@@ -66,8 +66,6 @@ function setupPrivateNpm() {
     touch .npmrc
     echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
     echo ".npmrc" >> .gitignore
-
-    npm install @clearvue/adonis-auth-middleware@latest
 }
 
 function configNamespaces() {
