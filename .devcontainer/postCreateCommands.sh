@@ -60,7 +60,7 @@ function setupRedis() {
     sed -i "31 i \ \ REDIS_HOST: Env.schema.string({ format: 'host' })," env.ts
     sed -i "32 i \ \ REDIS_PORT: Env.schema.number()," env.ts
     sed -i "33 i \ \ REDIS_PASSWORD: Env.schema.string.optional()," env.ts
-    sed -i "33 i \ \ REDIS_DB: Env.schema.number.optional()," env.ts
+    sed -i "34 i \ \ REDIS_DB: Env.schema.number.optional()," env.ts
 
     cp .devcontainer/resources/redis.ts config/redis.ts
 }
