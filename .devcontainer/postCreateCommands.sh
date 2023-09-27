@@ -45,11 +45,13 @@ function setupRedis() {
     echo "REDIS_HOST=127.0.0.1" >> .env
     echo "REDIS_PORT=6379" >> .env
     echo "REDIS_PASSWORD=" >> .env
+    echo "REDIS_DB=0" >> .env
 
     echo "REDIS_CONNECTION=local" >> .env.example
     echo "REDIS_HOST=127.0.0.1" >> .env.example
     echo "REDIS_PORT=6379" >> .env.example
     echo "REDIS_PASSWORD=" >> .env.example
+    echo "REDIS_DB=0" >> .env.example
 
     sed -i '/lucid/ s/^\(.*\)\("\)/\1", "\@adonisjs\/redis\"/' tsconfig.json
     sed -i '/\@adonisjs\/lucid"/ s/^\(.*\)\("\)/\1", "\@adonisjs\/redis\"/' .adonisrc.json
@@ -58,6 +60,7 @@ function setupRedis() {
     sed -i "31 i \ \ REDIS_HOST: Env.schema.string({ format: 'host' })," env.ts
     sed -i "32 i \ \ REDIS_PORT: Env.schema.number()," env.ts
     sed -i "33 i \ \ REDIS_PASSWORD: Env.schema.string.optional()," env.ts
+    sed -i "33 i \ \ REDIS_DB: Env.schema.number.optional()," env.ts
 
     cp .devcontainer/resources/redis.ts config/redis.ts
 }
