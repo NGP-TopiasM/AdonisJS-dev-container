@@ -101,8 +101,13 @@ function removeFiles() {
 }
 
 function loggerSetup() {
-  if [ -n "$PROJECT_NAME" ]; then echo "APP_NAME=${PROJECT_NAME}" >> .env; else echo "APP_NAME=NGP-MICROSERVICE" >> .env; fi
-  sed -i 's/generateRequestId:\ false/generateRequestId:\ true/g' config/app.ts
+    if [ -n "$PROJECT_NAME" ]; then echo "APP_NAME=${PROJECT_NAME}" >> .env; else echo "APP_NAME=NGP-MICROSERVICE" >> .env; fi
+    sed -i 's/generateRequestId:\ false/generateRequestId:\ true/g' config/app.ts
+}
+
+function additionalPrettierSettings() {
+    sed -i '38 i \ \ \ \ "tabWidth": 2,' package.json
+    npm run format
 }
 
 # Create AdonisJS project
@@ -132,5 +137,6 @@ if [ -n "$NPM_TOKEN" ]; then setupPrivateNpm; fi
 installCommonLibraries
 configNamespaces
 createConstsFile
+additionalPrettierSettings
 
 cp -r .devcontainer/resources/afterInitPostCreateCommands.sh .devcontainer/postCreateCommands.sh && removeFiles
