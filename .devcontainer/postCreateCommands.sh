@@ -65,10 +65,16 @@ function setupRedis() {
     cp .devcontainer/resources/redis.ts config/redis.ts
 }
 
+function installLogger() {
+    npm install @clearvue/adonis-logger
+    node ace invoke @clearvue/adonis-logger
+}
+
 function setupPrivateNpm() {
     touch .npmrc
     echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
     echo ".npmrc" >> .gitignore
+    installLogger
 }
 
 function configNamespaces() {
