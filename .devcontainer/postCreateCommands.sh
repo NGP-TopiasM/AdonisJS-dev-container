@@ -118,9 +118,9 @@ function additionalPrettierSettings() {
 
 # Create AdonisJS project
 if [ -n "$PROJECT_NAME" ]; then
-    npm install create-adonis-ts-app@4.2.4 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier --name=$PROJECT_NAME
+    npm install create-adonis-ts-app@4.2.5 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier --name=$PROJECT_NAME
 else
-    npm install create-adonis-ts-app@4.2.4 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier
+    npm install create-adonis-ts-app@4.2.5 --no-save --prefix ./ && npm init adonis-ts-app $FOLDER -- --boilerplate=api --eslint --prettier
 fi
 
 rm -r node_modules
